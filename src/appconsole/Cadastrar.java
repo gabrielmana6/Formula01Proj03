@@ -13,7 +13,8 @@ public class Cadastrar {
 			
 			Fachada.criarPiloto("Gabriel", "ferrari");
 			Fachada.criarPiloto("Geraldo", "mercedes");
-			
+			Fachada.criarPiloto("Toninho", "mercedes");
+			Fachada.criarPiloto("Shaolin", "rolima");
 			
 			Fachada.criarChegada(1, 1, "Gabriel");
 			Fachada.criarChegada(1, 2, "Geraldo");

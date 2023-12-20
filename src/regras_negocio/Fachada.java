@@ -59,6 +59,28 @@ public class Fachada {
 		return pilotos;
 	}
 
+	public static void editarPiloto(String nome, String novoNome, String novaEscuderia) throws Exception {
+		DAO.begin();
+
+		Piloto piloto = daopiloto.read(nome);
+		if (piloto == null) {
+			DAO.rollback();
+			throw new Exception("Piloto inexistente.");
+		}
+
+		Piloto novoPiloto = daopiloto.read(novoNome);
+		if (novoPiloto != null && !piloto.getNome().equalsIgnoreCase(novoNome)) {
+			DAO.rollback();
+			throw new Exception("Já existe um piloto com nome " + novoNome);
+		}
+
+		piloto.setNome(novoNome);
+		piloto.setEscuderia(novaEscuderia);
+		daopiloto.update(piloto);
+
+		DAO.commit();
+	}
+
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// fachada para prova
 
@@ -180,14 +202,67 @@ public class Fachada {
 			DAO.rollback();
 			throw new Exception("Chegada inexistente.");
 		}
-		
+
 		Piloto piloto = chegada.getPiloto();
-        Prova prova = chegada.getProva();
-		
+		Prova prova = chegada.getProva();
+
 		piloto.rmvChegada(chegada);
 		prova.rmvChegada(chegada);
-		
+
 		daochegada.delete(chegada);
 		DAO.commit();
 	}
+
+	public static void editarColocacao(int idChegada, int novaColocacao) throws Exception {
+		DAO.begin();
+
+		Chegada chegada = daochegada.read(idChegada);
+
+		if (chegada == null) {
+			DAO.rollback();
+			throw new Exception("Chegada inexistente.");
+		}
+
+		chegada.setColocacao(novaColocacao);
+		DAO.commit();
+	}
+
+	// Quais os pilotos da escuderia X
+	public static List<Piloto> queryListaEscuderias(String escuderia) throws Exception {
+		DAO.begin();
+		List<Piloto> pilotos = daopiloto.listaEscuderias(escuderia);
+		if (pilotos == null) {
+			DAO.rollback();
+			throw new Exception("Nenhum piloto com essa escuderia.");
+		}
+		DAO.commit();
+		return pilotos;
+	}
+
+	// Quais as provas com mais de N chegadas
+	public static List<Prova> queryListaProvas(int qtdChegadas) throws Exception {
+		DAO.begin();
+		List<Prova> provas = daoprova.queryListaProvas(qtdChegadas);
+
+		if (provas == null) {
+			DAO.rollback();
+			throw new Exception("Nenhum prova encontrada.");
+		}
+		DAO.commit();
+		return provas;
+	}
+
+	
+	// Quais as colocacoes do piloto de nome X
+	public static List<Integer> queryListaChegadas(String nome) throws Exception {
+		DAO.begin();
+		List<Integer> colocacoes = daochegada.queryListaProvas(nome);
+		if (colocacoes == null) {
+			DAO.rollback();
+			throw new Exception("Nenhum colocacao encontrada.");
+		}
+		DAO.commit();
+		return colocacoes;
+	}
+	
 }

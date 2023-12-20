@@ -1,25 +1,30 @@
-07:01:56,918  INFO Util:31 - Util.conectar - lendo arquivo util.properties: 
-07:01:56,922  INFO Util:38 - sgbd => postgresql
-07:01:56,922  INFO Util:39 - banco => formula01
-07:01:56,922  INFO Util:40 - ip => localhost
-07:01:56,922  INFO Util:45 - configurando postgresql
-07:01:56,947 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-07:01:57,043  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
-07:01:57,094  INFO Version:44 - HHH000412: Hibernate ORM core version 6.3.1.Final
-07:01:57,128 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
-07:01:57,129  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
-07:01:57,317  WARN pooling:80 - HHH10001002: Using built-in connection pool (not intended for production use)
-07:01:57,321  INFO pooling:135 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
-07:01:57,322  INFO pooling:157 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/formula01]
-07:01:57,322  INFO pooling:166 - HHH10001001: Connection properties: {password=****, user=postgres}
-07:01:57,322  INFO pooling:170 - HHH10001003: Autocommit mode: false
-07:01:57,324  INFO pooling:366 - HHH10001115: Connection pool size: 20 (min=1)
-07:01:57,537  WARN deprecation:152 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-07:01:58,383  INFO JtaPlatformInitiator:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-07:01:58,400  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@39dec536] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-07:01:58,761 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
-07:01:58,812 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
-07:01:58,820 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
-07:01:58,843 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,c1_0.id_prova from chegada c1_0 where c1_0.id=?
-07:01:58,843 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-07:01:58,846  INFO pooling:601 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/formula01]
+09:58:48,567  INFO Util:31 - Util.conectar - lendo arquivo util.properties: 
+09:58:48,570  INFO Util:38 - sgbd => postgresql
+09:58:48,570  INFO Util:39 - banco => formula01
+09:58:48,571  INFO Util:40 - ip => localhost
+09:58:48,571  INFO Util:45 - configurando postgresql
+09:58:48,599 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+09:58:48,696  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
+09:58:48,748  INFO Version:44 - HHH000412: Hibernate ORM core version 6.3.1.Final
+09:58:48,781 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+09:58:48,782  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
+09:58:48,966  WARN pooling:80 - HHH10001002: Using built-in connection pool (not intended for production use)
+09:58:48,969  INFO pooling:135 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+09:58:48,970  INFO pooling:157 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/formula01]
+09:58:48,970  INFO pooling:166 - HHH10001001: Connection properties: {password=****, user=postgres}
+09:58:48,970  INFO pooling:170 - HHH10001003: Autocommit mode: false
+09:58:48,973  INFO pooling:366 - HHH10001115: Connection pool size: 20 (min=1)
+09:58:49,185  WARN deprecation:152 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+09:58:50,050  INFO JtaPlatformInitiator:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+09:58:50,066  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@603cabc4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+09:58:50,464 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.escuderia=?
+09:58:50,465 TRACE bind:24 - binding parameter (1:VARCHAR) <- [mercedes]
+09:58:50,535 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova where (select count(1) from chegada c2_0 where p1_0.id=c2_0.id_prova)>?
+09:58:50,535 TRACE bind:24 - binding parameter (1:INTEGER) <- [0]
+09:58:50,542 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+09:58:50,542 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+09:58:50,543 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+09:58:50,544 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
+09:58:50,556 DEBUG SQL:135 - select c1_0.colocacao from chegada c1_0 join piloto p1_0 on p1_0.id=c1_0.id_piloto where p1_0.nome=?
+09:58:50,556 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Gabriel]
+09:58:50,558  INFO pooling:601 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/formula01]
