@@ -72,6 +72,6 @@ public class Chegada {
 
 	@Override
 	public String toString() {
-		return "Chegada [id=" + id + ", prova=" + prova + ", colocacao=" + colocacao + ", piloto=" + piloto + "]";
+		return "Chegada [id=" + id + ", prova=" + prova.getId() + ", colocacao=" + colocacao + ", piloto=" + piloto.getNome() + "]";
 	}
 }

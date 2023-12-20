@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -21,13 +18,6 @@ public class Prova {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-
-	@ManyToOne
-	@JoinColumn(name = "id_prova", nullable = false)
-	private Prova prova;
-
-	@Column(name = "colocacao")
-	private Integer colocacao;
 
 	@OneToMany(mappedBy = "prova", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Chegada> chegadas = new ArrayList<>();
@@ -54,22 +44,6 @@ public class Prova {
 		this.id = id;
 	}
 
-	public Prova getProva() {
-		return prova;
-	}
-
-	public void setProva(Prova prova) {
-		this.prova = prova;
-	}
-
-	public Integer getColocacao() {
-		return colocacao;
-	}
-
-	public void setColocacao(Integer colocacao) {
-		this.colocacao = colocacao;
-	}
-
 	public List<Chegada> getChegadas() {
 		return chegadas;
 	}
@@ -80,6 +54,7 @@ public class Prova {
 
 	@Override
 	public String toString() {
-		return "Prova [id=" + id + ", prova=" + prova + ", colocacao=" + colocacao + ", chegadas=" + chegadas + "]";
+		return "Prova [id=" + id + ", chegadas=" + chegadas + "]";
 	}
+
 }
