@@ -11,8 +11,7 @@ public class DAOProva extends DAO<Prova> {
 
 	public Prova read(Object chave) {
 		try {
-			int id = (int) chave;
-
+			long id = (long) chave;
 			TypedQuery<Prova> q = manager.createQuery("SELECT p FROM Prova p WHERE p.id = :n", Prova.class);
 			q.setParameter("n", id);
 

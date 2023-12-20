@@ -15,6 +15,15 @@ public class Deletar {
 			
 			//Fachada.deletarChegada(3);
 			
+			//Fachada.deletarTodosPilotos();
+			//Fachada.deletarTodasProvas();
+			//Fachada.deletarTodasChegadas();
+			//Fachada.criarProva();
+			
+			Fachada.criarChegada(3, 3, "Toninho");
+			Fachada.criarChegada(2, 1, "Toninho");
+			
+			Fachada.criarChegada(2, 2, "Geraldo");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

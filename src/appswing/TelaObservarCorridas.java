@@ -133,7 +133,7 @@ public class TelaObservarCorridas {
 		        Prova selectedProva = provas.get(comboBox.getSelectedIndex());
 
 		        // Adicione linhas para cada ocorrência na lista de chegada
-		        List<Chegada> listaChegada = selectedProva.getListaDeChegada();
+		        List<Chegada> listaChegada = selectedProva.getChegadas();
 		        Collections.sort(listaChegada, Comparator.comparingInt(Chegada::getColocacao));
 		        
 		        for (Chegada chegada : listaChegada) {

@@ -440,7 +440,12 @@ public class TelaPiloto {
 		JButton btnNewButton_3 = new JButton("Deletar Todos os Pilotos");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Fachada.deletarTodosPilotos();
+				try {
+					Fachada.deletarTodosPilotos();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				//limpa a tabela setando o numero de linhas para 0
 				tableModel.setRowCount(0);

@@ -1,30 +1,161 @@
-09:58:48,567  INFO Util:31 - Util.conectar - lendo arquivo util.properties: 
-09:58:48,570  INFO Util:38 - sgbd => postgresql
-09:58:48,570  INFO Util:39 - banco => formula01
-09:58:48,571  INFO Util:40 - ip => localhost
-09:58:48,571  INFO Util:45 - configurando postgresql
-09:58:48,599 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-09:58:48,696  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
-09:58:48,748  INFO Version:44 - HHH000412: Hibernate ORM core version 6.3.1.Final
-09:58:48,781 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
-09:58:48,782  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
-09:58:48,966  WARN pooling:80 - HHH10001002: Using built-in connection pool (not intended for production use)
-09:58:48,969  INFO pooling:135 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
-09:58:48,970  INFO pooling:157 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/formula01]
-09:58:48,970  INFO pooling:166 - HHH10001001: Connection properties: {password=****, user=postgres}
-09:58:48,970  INFO pooling:170 - HHH10001003: Autocommit mode: false
-09:58:48,973  INFO pooling:366 - HHH10001115: Connection pool size: 20 (min=1)
-09:58:49,185  WARN deprecation:152 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-09:58:50,050  INFO JtaPlatformInitiator:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-09:58:50,066  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@603cabc4] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-09:58:50,464 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.escuderia=?
-09:58:50,465 TRACE bind:24 - binding parameter (1:VARCHAR) <- [mercedes]
-09:58:50,535 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova where (select count(1) from chegada c2_0 where p1_0.id=c2_0.id_prova)>?
-09:58:50,535 TRACE bind:24 - binding parameter (1:INTEGER) <- [0]
-09:58:50,542 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
-09:58:50,542 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
-09:58:50,543 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
-09:58:50,544 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-09:58:50,556 DEBUG SQL:135 - select c1_0.colocacao from chegada c1_0 join piloto p1_0 on p1_0.id=c1_0.id_piloto where p1_0.nome=?
-09:58:50,556 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Gabriel]
-09:58:50,558  INFO pooling:601 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/formula01]
+11:22:13,839  INFO Util:31 - Util.conectar - lendo arquivo util.properties: 
+11:22:13,842  INFO Util:38 - sgbd => postgresql
+11:22:13,842  INFO Util:39 - banco => formula01
+11:22:13,842  INFO Util:40 - ip => localhost
+11:22:13,842  INFO Util:45 - configurando postgresql
+11:22:13,861 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+11:22:13,953  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
+11:22:14,002  INFO Version:44 - HHH000412: Hibernate ORM core version 6.3.1.Final
+11:22:14,034 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+11:22:14,035  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
+11:22:14,232  WARN pooling:80 - HHH10001002: Using built-in connection pool (not intended for production use)
+11:22:14,235  INFO pooling:135 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+11:22:14,236  INFO pooling:157 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/formula01]
+11:22:14,236  INFO pooling:166 - HHH10001001: Connection properties: {password=****, user=postgres}
+11:22:14,236  INFO pooling:170 - HHH10001003: Autocommit mode: false
+11:22:14,239  INFO pooling:366 - HHH10001115: Connection pool size: 20 (min=1)
+11:22:14,438  WARN deprecation:152 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+11:22:15,278  INFO JtaPlatformInitiator:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+11:22:15,295  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@3d0de4d1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+11:22:17,192 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:22:17,208 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:17,208 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:22:17,217 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:17,217 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:22:17,235 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:22:17,257 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:22:21,748 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:22:21,749 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:21,749 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:22:21,750 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:21,750 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:22:21,753 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:22:21,757 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:22:23,933 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:22:23,934 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:23,934 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:22:23,935 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:23,935 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:22:26,748 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:22:35,704 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
+11:22:35,704 TRACE bind:24 - binding parameter (1:VARCHAR) <- [carlos]
+11:22:35,713 DEBUG SQL:135 - insert into piloto (escuderia,nome) values (?,?)
+11:22:35,714 TRACE bind:24 - binding parameter (1:VARCHAR) <- [san andreas]
+11:22:35,714 TRACE bind:24 - binding parameter (2:VARCHAR) <- [carlos]
+11:22:35,729 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:22:39,451 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:22:44,431 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:22:44,432 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:44,433 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:22:44,433 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:44,434 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:22:47,529 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:22:49,944 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:22:56,282 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:22:56,283 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:56,283 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:22:56,284 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:22:56,284 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:03,791 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
+11:23:03,791 TRACE bind:24 - binding parameter (1:BIGINT) <- [4]
+11:23:03,794 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
+11:23:03,795 TRACE bind:24 - binding parameter (1:BIGINT) <- [4]
+11:23:03,800 DEBUG SQL:135 - delete from prova where id=?
+11:23:03,800 TRACE bind:24 - binding parameter (1:BIGINT) <- [4]
+11:23:03,807 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:23:03,808 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:23:03,808 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:03,809 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:23:03,809 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:07,272 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:10,305 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:14,410 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:15,385 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:19,351 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:19,355 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,c1_0.id_prova from chegada c1_0 where c1_0.id=?
+11:23:19,355 TRACE bind:24 - binding parameter (1:BIGINT) <- [5]
+11:23:19,356 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:19,357 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:19,358 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
+11:23:19,358 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:19,362 DEBUG SQL:135 - delete from chegada where id=?
+11:23:19,363 TRACE bind:24 - binding parameter (1:BIGINT) <- [5]
+11:23:19,370 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,c1_0.id_prova from chegada c1_0 where c1_0.id=?
+11:23:19,370 TRACE bind:24 - binding parameter (1:BIGINT) <- [6]
+11:23:19,371 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:23:19,371 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:19,372 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
+11:23:19,372 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:19,372 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:19,373 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:19,373 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
+11:23:19,373 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:19,374 DEBUG SQL:135 - delete from chegada where id=?
+11:23:19,374 TRACE bind:24 - binding parameter (1:BIGINT) <- [6]
+11:23:19,376 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,c1_0.id_prova from chegada c1_0 where c1_0.id=?
+11:23:19,376 TRACE bind:24 - binding parameter (1:BIGINT) <- [7]
+11:23:19,376 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
+11:23:19,377 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:19,377 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
+11:23:19,377 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:19,378 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:19,378 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:19,379 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
+11:23:19,379 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:19,379 DEBUG SQL:135 - delete from chegada where id=?
+11:23:19,380 TRACE bind:24 - binding parameter (1:BIGINT) <- [7]
+11:23:19,380 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:22,429 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:23,106 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:23,336 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,p2_0.id,p2_0.escuderia,p2_0.nome,c1_0.id_prova,p1_0.id from chegada c1_0 left join prova p1_0 on p1_0.id=c1_0.id_prova join piloto p2_0 on p2_0.id=c1_0.id_piloto order by c1_0.id
+11:23:29,412 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:23:31,226 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:23:31,228 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:23:31,232 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:23:39,829 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:23:42,886 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:23:42,887 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
+11:23:42,887 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:42,888 DEBUG SQL:135 - delete from prova where id=?
+11:23:42,888 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:42,894 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
+11:23:42,894 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:42,895 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
+11:23:42,895 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:42,896 DEBUG SQL:135 - delete from prova where id=?
+11:23:42,896 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:42,897 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
+11:23:45,371 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:23:46,430 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:23:46,432 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
+11:23:46,432 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Gabriel]
+11:23:46,433 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:46,433 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
+11:23:46,434 DEBUG SQL:135 - delete from piloto where id=?
+11:23:46,434 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
+11:23:46,440 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
+11:23:46,440 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Geraldo]
+11:23:46,441 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:46,441 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:46,442 DEBUG SQL:135 - delete from piloto where id=?
+11:23:46,442 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
+11:23:46,443 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
+11:23:46,443 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Toninho]
+11:23:46,444 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:46,444 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:46,444 DEBUG SQL:135 - delete from piloto where id=?
+11:23:46,445 TRACE bind:24 - binding parameter (1:BIGINT) <- [3]
+11:23:46,445 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
+11:23:46,446 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Shaolin]
+11:23:46,446 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:46,447 TRACE bind:24 - binding parameter (1:BIGINT) <- [4]
+11:23:46,447 DEBUG SQL:135 - delete from piloto where id=?
+11:23:46,447 TRACE bind:24 - binding parameter (1:BIGINT) <- [4]
+11:23:46,448 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
+11:23:46,448 TRACE bind:24 - binding parameter (1:VARCHAR) <- [carlos]
+11:23:46,449 DEBUG SQL:135 - select c1_0.id_piloto,c1_0.id,c1_0.colocacao,c1_0.id_prova,p2_0.id from chegada c1_0 left join prova p2_0 on p2_0.id=c1_0.id_prova where c1_0.id_piloto=?
+11:23:46,449 TRACE bind:24 - binding parameter (1:BIGINT) <- [5]
+11:23:46,450 DEBUG SQL:135 - delete from piloto where id=?
+11:23:46,450 TRACE bind:24 - binding parameter (1:BIGINT) <- [5]
+11:23:46,451 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
+11:23:58,140  INFO pooling:601 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/formula01]

@@ -82,6 +82,34 @@ public class Fachada {
 		DAO.commit();
 	}
 
+	public static void deletarPiloto(String nome) throws Exception {
+		DAO.begin();
+		Piloto piloto = daopiloto.read(nome);
+		if (piloto == null) {
+			DAO.rollback();
+			throw new Exception("Piloto inexistente.");
+		}
+
+		daopiloto.delete(piloto);
+		DAO.commit();
+	}
+
+	public static void deletarTodosPilotos() throws Exception {
+		try {
+			DAO.begin();
+			List<Piloto> pilotos = daopiloto.readAll();
+			if (pilotos == null) {
+				DAO.rollback();
+			}
+			for (Piloto piloto : pilotos) {
+				deletarPiloto(piloto.getNome());
+			}
+			DAO.commit();
+		} catch (Exception e) {
+
+		}
+	}
+
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// fachada para prova
 
@@ -110,19 +138,7 @@ public class Fachada {
 		return provas;
 	}
 
-	public static void deletarPiloto(String nome) throws Exception {
-		DAO.begin();
-		Piloto piloto = daopiloto.read(nome);
-		if (piloto == null) {
-			DAO.rollback();
-			throw new Exception("Piloto inexistente.");
-		}
-
-		daopiloto.delete(piloto);
-		DAO.commit();
-	}
-
-	public static void deletarProva(int id) throws Exception {
+	public static void deletarProva(long id) throws Exception {
 		DAO.begin();
 		Prova prova = daoprova.read(id);
 		if (prova == null) {
@@ -133,11 +149,27 @@ public class Fachada {
 		daoprova.delete(prova);
 		DAO.commit();
 	}
+	
+	public static void deletarTodasProvas() throws Exception {
+		try {
+			DAO.begin();
+			List<Prova> provas = daoprova.readAll();
+			if (provas == null) {
+				DAO.rollback();
+			}
+			for (Prova prova: provas) {
+				deletarProva(prova.getId());
+			}
+			DAO.commit();
+		} catch (Exception e) {
+
+		}
+	}
 
 	// ----------------------------------------------------------------------------------------------------------------------------------------------
 	// fachada para chegada
 
-	public static void criarChegada(int id, int colocacao, String nome) throws Exception {
+	public static void criarChegada(long id, int colocacao, String nome) throws Exception {
 		DAO.begin();
 
 		if (colocacao <= 0) {
@@ -176,7 +208,7 @@ public class Fachada {
 		DAO.commit();
 	}
 
-	public static Chegada listarChegada(int id) throws Exception {
+	public static Chegada listarChegada(long id) throws Exception {
 		DAO.begin();
 		Chegada chegada = daochegada.read(id);
 		if (chegada == null) {
@@ -194,7 +226,7 @@ public class Fachada {
 		return chegadas;
 	}
 
-	public static void deletarChegada(int id) throws Exception {
+	public static void deletarChegada(long id) throws Exception {
 		DAO.begin();
 
 		Chegada chegada = daochegada.read(id);
@@ -213,7 +245,23 @@ public class Fachada {
 		daochegada.delete(chegada);
 		DAO.commit();
 	}
+	
+	public static void deletarTodasChegadas() throws Exception {
+		DAO.begin();
+		List<Chegada> chegadas = daochegada.readAll();
+		if (chegadas == null) {
+			DAO.rollback();
+			throw new Exception("Chegadas vazio.");
+		}
+		for (Chegada chegada: chegadas) {
+			deletarChegada(chegada.getId());
+		}
+		DAO.commit();
+	}
 
+	
+	// ----------------------------------------------------------------------------------------------------------------------------------------------
+	// OUTROS METODOS
 	public static void editarColocacao(int idChegada, int novaColocacao) throws Exception {
 		DAO.begin();
 
@@ -253,7 +301,6 @@ public class Fachada {
 		return provas;
 	}
 
-	
 	// Quais as colocacoes do piloto de nome X
 	public static List<Integer> queryListaChegadas(String nome) throws Exception {
 		DAO.begin();
@@ -265,38 +312,36 @@ public class Fachada {
 		DAO.commit();
 		return colocacoes;
 	}
-	
-	
+
 	public static List<Long> queryProvaDoPiloto(String nome) throws Exception {
-    	DAO.begin();
-    	Piloto piloto = daopiloto.read(nome);
-    	List<Prova> provas = daoprova.listarProvasDoPiloto(piloto);
-    	
-    	if(provas == null) {
-    		DAO.rollback();
-    		throw new Exception("Piloto não está em nenhuma prova");
-    	}
-    	
-    	List<Long> idProvas = new ArrayList<>();
-    	for(Prova prova: provas) {
-    		idProvas.add(prova.getId());
-    	}
-    	
-    	DAO.commit();
-    	return idProvas;
-    }
-	
+		DAO.begin();
+		Piloto piloto = daopiloto.read(nome);
+		List<Prova> provas = daoprova.listarProvasDoPiloto(piloto);
+
+		if (provas == null) {
+			DAO.rollback();
+			throw new Exception("Piloto não está em nenhuma prova");
+		}
+
+		List<Long> idProvas = new ArrayList<>();
+		for (Prova prova : provas) {
+			idProvas.add(prova.getId());
+		}
+
+		DAO.commit();
+		return idProvas;
+	}
+
 	public static Chegada obterChegada(int idProva, String nome) {
 		DAO.begin();
 		Piloto piloto = daopiloto.read(nome);
 		Prova prova = daoprova.read(idProva);
-		
-		Long idChegada = daochegada.obterIdChegada(prova, piloto);
+
+		Long idChegada = daochegada.listarId(prova, piloto);
 		Chegada chegada = daochegada.read(idChegada);
-		
-		
+
 		DAO.commit();
 		return chegada;
 	}
-	
+
 }

@@ -12,7 +12,7 @@ public class DAOChegada extends DAO<Chegada> {
 
 	public Chegada read(Object chave) {
 		try {
-			int id = (int) chave;
+			long id = (long) chave;
 			TypedQuery<Chegada> q = manager.createQuery("select c from Chegada c where c.id = :n ", Chegada.class);
 			q.setParameter("n", id);
 
@@ -41,7 +41,7 @@ public class DAOChegada extends DAO<Chegada> {
 		}
 	}
 	
-	public Long obterIdChegada(Prova prova, Piloto piloto) {
+	public Long listarId(Prova prova, Piloto piloto) {
 	    TypedQuery<Long> query = manager.createQuery(
 	        "SELECT c.id FROM Chegada c WHERE c.prova = :prova AND c.piloto = :piloto", Long.class);
 	    query.setParameter("prova", prova);
@@ -50,7 +50,7 @@ public class DAOChegada extends DAO<Chegada> {
 	    try {
 	        return query.getSingleResult();
 	    } catch (NoResultException e) {
-	        return null;
+	        return null; 
 	    }
 	}
 

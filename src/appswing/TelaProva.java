@@ -101,7 +101,7 @@ public class TelaProva {
 
 		//preenchendo a tabela com os objetos das provas
 		for (Prova prova : provas) {
-		    tableModel.addRow(new Object[]{prova.getId(), prova.getListaDeChegada().size()});
+		    tableModel.addRow(new Object[]{prova.getId(), prova.getChegadas().size()});
 		}
 		
 //----------------------------------------------------------------------------------------
@@ -136,7 +136,7 @@ public class TelaProva {
 
 				//preenchendo a tabela com os objetos das provas
 				for (Prova prova : provas) {
-				    tableModel.addRow(new Object[]{prova.getId(), prova.getListaDeChegada().size()});
+				    tableModel.addRow(new Object[]{prova.getId(), prova.getChegadas().size()});
 				}
 				
 			}
@@ -188,7 +188,7 @@ public class TelaProva {
 
 					//preenchendo a tabela com os objetos das provas
 					for (Prova prova : provas) {
-					    tableModel.addRow(new Object[]{prova.getId(), prova.getListaDeChegada().size()});
+					    tableModel.addRow(new Object[]{prova.getId(), prova.getChegadas().size()});
 					}
 				}
 				catch (Exception ex){
@@ -251,7 +251,7 @@ public class TelaProva {
 				                tableModel.setRowCount(0);
 				              
 				                //preenche a tabela com o objeto da prova encontrado
-				                tableModel.addRow(new Object[]{prova.getId(), prova.getListaDeChegada().size()});
+				                tableModel.addRow(new Object[]{prova.getId(), prova.getChegadas().size()});
 				                
 				                //fecha a janela de busca individual de piloto
 				                janelaBusca.dispose();	
@@ -292,7 +292,7 @@ public class TelaProva {
 
 				//preenchendo a tabela com os objetos das provas
 				for (Prova prova : provas) {
-				    tableModel.addRow(new Object[]{prova.getId(), prova.getListaDeChegada().size()});
+				    tableModel.addRow(new Object[]{prova.getId(), prova.getChegadas().size()});
 				}
 				
 			}
@@ -303,7 +303,12 @@ public class TelaProva {
 		JButton btnNewButton_3 = new JButton("Deletar Todas as Provas");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Fachada.deletarTodasProvas();
+				try {
+					Fachada.deletarTodasProvas();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				//limpa a tabela setando o numero de linhas para 0
 				tableModel.setRowCount(0);
@@ -313,7 +318,7 @@ public class TelaProva {
 
 				//preenchendo a tabela com os objetos das provas
 				for (Prova prova : provas) {
-				    tableModel.addRow(new Object[]{prova.getId(), prova.getListaDeChegada().size()});
+				    tableModel.addRow(new Object[]{prova.getId(), prova.getChegadas().size()});
 				}
 			}
 		});
@@ -368,7 +373,7 @@ public class TelaProva {
 
 								//preenchendo a tabela com os objetos dos pilotos
 								for (Prova prova : provas) {
-								    tableModel.addRow(new Object[]{prova.getId(), prova.getListaDeChegada().size()});
+								    tableModel.addRow(new Object[]{prova.getId(), prova.getChegadas().size()});
 								}
 								
 								

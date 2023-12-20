@@ -316,8 +316,8 @@ public class TelaChegada {
 				
 				try {
 					//deletando objeto chegada
-					Chegada chegada = Fachada.listarChegada(provaId);
-					Fachada.deletarChegada(provaId, texto2);
+					Chegada c = Fachada.obterChegada(provaId, texto2);
+					Fachada.deletarChegada(c.getId());
 					lblNewLabel_4_1_1.setText("Chegada deletada");
 					
 					//limpa a tabela setando o numero de linhas para 0
@@ -382,7 +382,8 @@ public class TelaChegada {
 			                String nomePiloto = textFieldPiloto.getText();
 			                
 			                try {
-				                Chegada chegada = Fachada.listarChegada(provaId, nomePiloto);
+			                	Chegada c = Fachada.obterChegada(provaId, nomePiloto);
+				                Chegada chegada = Fachada.listarChegada(c.getId());
 				                
 				                //limpa a tabela setando o numero de linhas para 0
 				                tableModel.setRowCount(0);
@@ -442,7 +443,12 @@ public class TelaChegada {
 		JButton btnNewButton_4 = new JButton("Deletar Todas as Chegadas");
 		btnNewButton_4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Fachada.deletarTodasChegadas();
+				try {
+					Fachada.deletarTodasChegadas();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
 				//limpa a tabela setando o numero de linhas para 0
 				tableModel.setRowCount(0);
