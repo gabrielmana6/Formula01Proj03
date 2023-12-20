@@ -1,5 +1,6 @@
 package regras_negocio;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import daojpa.DAO;
@@ -263,6 +264,39 @@ public class Fachada {
 		}
 		DAO.commit();
 		return colocacoes;
+	}
+	
+	
+	public static List<Long> queryProvaDoPiloto(String nome) throws Exception {
+    	DAO.begin();
+    	Piloto piloto = daopiloto.read(nome);
+    	List<Prova> provas = daoprova.listarProvasDoPiloto(piloto);
+    	
+    	if(provas == null) {
+    		DAO.rollback();
+    		throw new Exception("Piloto não está em nenhuma prova");
+    	}
+    	
+    	List<Long> idProvas = new ArrayList<>();
+    	for(Prova prova: provas) {
+    		idProvas.add(prova.getId());
+    	}
+    	
+    	DAO.commit();
+    	return idProvas;
+    }
+	
+	public static Chegada obterChegada(int idProva, String nome) {
+		DAO.begin();
+		Piloto piloto = daopiloto.read(nome);
+		Prova prova = daoprova.read(idProva);
+		
+		Long idChegada = daochegada.obterIdChegada(prova, piloto);
+		Chegada chegada = daochegada.read(idChegada);
+		
+		
+		DAO.commit();
+		return chegada;
 	}
 	
 }

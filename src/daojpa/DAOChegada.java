@@ -6,6 +6,7 @@ import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 import modelo.Chegada;
 import modelo.Piloto;
+import modelo.Prova;
 
 public class DAOChegada extends DAO<Chegada> {
 
@@ -39,4 +40,18 @@ public class DAOChegada extends DAO<Chegada> {
 			return null;
 		}
 	}
+	
+	public Long obterIdChegada(Prova prova, Piloto piloto) {
+	    TypedQuery<Long> query = manager.createQuery(
+	        "SELECT c.id FROM Chegada c WHERE c.prova = :prova AND c.piloto = :piloto", Long.class);
+	    query.setParameter("prova", prova);
+	    query.setParameter("piloto", piloto);
+
+	    try {
+	        return query.getSingleResult();
+	    } catch (NoResultException e) {
+	        return null;
+	    }
+	}
+
 }

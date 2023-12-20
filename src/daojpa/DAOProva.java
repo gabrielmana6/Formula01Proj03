@@ -4,6 +4,7 @@ import java.util.List;
 
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
+import modelo.Piloto;
 import modelo.Prova;
 
 public class DAOProva extends DAO<Prova> {
@@ -32,4 +33,20 @@ public class DAOProva extends DAO<Prova> {
 		q.setParameter("x", qtdChegadas);
 		return q.getResultList();
 	}
+	
+	//Quais as provas com mais de N chegadas
+	public List<Prova> listarProvasDoPiloto(Piloto piloto) {
+	    TypedQuery<Prova> query = manager.createQuery(
+	        "SELECT p FROM Prova p JOIN p.listaDeChegada c WHERE c.piloto = :piloto", Prova.class);
+	    query.setParameter("piloto", piloto);
+
+	    List<Prova> provas = query.getResultList();
+
+	    if (!provas.isEmpty()) {
+	        return provas;
+	    } else {
+	        return null;
+	    }
+	}
+
 }

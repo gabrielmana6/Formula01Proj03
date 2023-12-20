@@ -15,6 +15,7 @@ public class Deletar {
 			
 			//Fachada.deletarChegada(3);
 			
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
