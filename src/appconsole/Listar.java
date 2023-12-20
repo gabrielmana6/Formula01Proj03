@@ -34,9 +34,9 @@ public class Listar {
 				System.out.println(c);
 			
 			System.out.println();
-			Chegada chegada = Fachada.listarChegada(1, "Gabriel");
-			Chegada chegada2 = Fachada.listarChegada(1, "Geraldo");
-			Chegada chegada3 = Fachada.listarChegada(2, "Geraldo");
+			Chegada chegada = Fachada.listarChegada(1);
+			Chegada chegada2 = Fachada.listarChegada(2);
+			Chegada chegada3 = Fachada.listarChegada(3);
 			//System.out.println(chegada);
 			//System.out.println(chegada2);
 			//System.out.println(chegada3);

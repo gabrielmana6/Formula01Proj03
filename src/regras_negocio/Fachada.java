@@ -117,8 +117,10 @@ public class Fachada {
 	public static void criarChegada(int id, int colocacao, String nome) throws Exception {
 		DAO.begin();
 
-		if (colocacao <= 0)
+		if (colocacao <= 0) {
+			DAO.rollback();
 			throw new Exception("Colocacao deve ser maior que zero");
+		}
 
 		Piloto pilotoChegada = daopiloto.read(nome);
 		if (pilotoChegada == null) {
@@ -151,28 +153,9 @@ public class Fachada {
 		DAO.commit();
 	}
 
-	public static Chegada listarChegada(int id, String nome) throws Exception {
+	public static Chegada listarChegada(int id) throws Exception {
 		DAO.begin();
-		Piloto pilotoChegada = daopiloto.read(nome);
-		if (pilotoChegada == null) {
-			DAO.rollback();
-			throw new Exception("Piloto inexistente.");
-		}
-
-		Prova provaChegada = daoprova.read(id);
-		if (provaChegada == null) {
-			DAO.rollback();
-			throw new Exception("Prova inexistente.");
-		}
-
-		Chegada chegada = null;
-		for (Chegada c : provaChegada.getChegadas()) {
-			if (c.getPiloto().getNome().equalsIgnoreCase(nome)) {
-				chegada = c;
-				break;
-			}
-		}
-
+		Chegada chegada = daochegada.read(id);
 		if (chegada == null) {
 			DAO.rollback();
 			throw new Exception("Chegada inexistente.");
@@ -188,16 +171,22 @@ public class Fachada {
 		return chegadas;
 	}
 
-	public static void deletarChegada(int id, String nome) throws Exception {
+	public static void deletarChegada(int id) throws Exception {
 		DAO.begin();
 
-		Chegada chegada = listarChegada(id, nome);
+		Chegada chegada = daochegada.read(id);
 
 		if (chegada == null) {
 			DAO.rollback();
 			throw new Exception("Chegada inexistente.");
 		}
-
+		
+		Piloto piloto = chegada.getPiloto();
+        Prova prova = chegada.getProva();
+		
+		piloto.rmvChegada(chegada);
+		prova.rmvChegada(chegada);
+		
 		daochegada.delete(chegada);
 		DAO.commit();
 	}

@@ -13,7 +13,7 @@ public class Deletar {
 			
 			//Fachada.deletarProva(1);
 			
-			Fachada.deletarChegada(1, "Geraldo");
+			//Fachada.deletarChegada(3);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

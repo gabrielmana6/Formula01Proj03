@@ -36,6 +36,15 @@ public class Piloto {
 		this.escuderia = escuderia;
 	}
 
+	// Metodos
+	public void addChegada(Chegada chegada) {
+		this.chegadas.add(chegada);
+	}
+
+	public void rmvChegada(Chegada chegada) {
+		this.chegadas.remove(chegada);
+	}
+
 	// Getters and setters
 	public String getNome() {
 		return nome;
@@ -51,6 +60,14 @@ public class Piloto {
 
 	public void setEscuderia(String escuderia) {
 		this.escuderia = escuderia;
+	}
+	
+	public List<Chegada> getChegadas() {
+		return chegadas;
+	}
+
+	public void setChegadas(List<Chegada> chegadas) {
+		this.chegadas = chegadas;
 	}
 
 	@Override
