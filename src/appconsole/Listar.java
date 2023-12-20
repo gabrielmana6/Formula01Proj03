@@ -6,33 +6,28 @@ import modelo.Prova;
 import regras_negocio.Fachada;
 
 public class Listar {
-
+	
 	public Listar(){
 		try {
 			Fachada.inicializar();
 
-			/*
-			Piloto piloto = Fachada.listarPiloto("Gabriel");
-			System.out.println(piloto);
-			*/
-			
-			System.out.println("***\n Listagem de piloto:");
+			System.out.println("\n*** Listagem de piloto:");
 			for(Piloto p : Fachada.listarPilotos())		
 				System.out.println(p);
 			
 			System.out.println();
-			Piloto piloto = Fachada.listarPiloto("Gabriel");
-			System.out.println(piloto);
+			//Piloto piloto = Fachada.listarPiloto("Gabriel");
+			//System.out.println(piloto);
 			
 			System.out.println("\n*** Listagem de prova:");
 			for(Prova p : Fachada.listarProvas())		
 				System.out.println(p);
 			
 			System.out.println();
-			Prova prova = Fachada.listarProva(1);
-			Prova prova2 = Fachada.listarProva(2);
-			System.out.println(prova);
-			System.out.println(prova2);
+			//Prova prova = Fachada.listarProva(1);
+			//Prova prova2 = Fachada.listarProva(2);
+			//System.out.println(prova);
+			//System.out.println(prova2);
 			
 			System.out.println("\n*** Listagem de chegada:");
 			for(Chegada c : Fachada.listarChegadas())		
@@ -42,9 +37,9 @@ public class Listar {
 			Chegada chegada = Fachada.listarChegada(1, "Gabriel");
 			Chegada chegada2 = Fachada.listarChegada(1, "Geraldo");
 			Chegada chegada3 = Fachada.listarChegada(2, "Geraldo");
-			System.out.println(chegada);
-			System.out.println(chegada2);
-			System.out.println(chegada3);
+			//System.out.println(chegada);
+			//System.out.println(chegada2);
+			//System.out.println(chegada3);
 
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

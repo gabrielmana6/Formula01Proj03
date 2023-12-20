@@ -1,53 +1,26 @@
-04:56:05,037  INFO Util:31 - Util.conectar - lendo arquivo util.properties: 
-04:56:05,040  INFO Util:38 - sgbd => postgresql
-04:56:05,040  INFO Util:39 - banco => formula01
-04:56:05,040  INFO Util:40 - ip => localhost
-04:56:05,041  INFO Util:45 - configurando postgresql
-04:56:05,065 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
-04:56:05,162  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
-04:56:05,212  INFO Version:44 - HHH000412: Hibernate ORM core version 6.3.1.Final
-04:56:05,246 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
-04:56:05,247  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
-04:56:05,429  WARN pooling:80 - HHH10001002: Using built-in connection pool (not intended for production use)
-04:56:05,433  INFO pooling:135 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
-04:56:05,433  INFO pooling:157 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/formula01]
-04:56:05,433  INFO pooling:166 - HHH10001001: Connection properties: {password=****, user=postgres}
-04:56:05,434  INFO pooling:170 - HHH10001003: Autocommit mode: false
-04:56:05,436  INFO pooling:366 - HHH10001115: Connection pool size: 20 (min=1)
-04:56:05,648  WARN deprecation:152 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
-04:56:06,487  INFO JtaPlatformInitiator:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
-04:56:06,502  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@5a90265a] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
-04:56:06,856 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0
-04:56:06,908 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
-04:56:06,909 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Gabriel]
-04:56:06,930 DEBUG SQL:135 - select p1_0.id,c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto from prova p1_0 left join chegada c1_0 on p1_0.id=c1_0.id_prova order by p1_0.id
-04:56:06,937 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.id=?
-04:56:06,938 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
-04:56:06,948 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
-04:56:06,948 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-04:56:06,950 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
-04:56:06,950 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
-04:56:06,953 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
-04:56:06,953 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-04:56:06,954 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
-04:56:06,955 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
-04:56:06,958 DEBUG SQL:135 - select c1_0.id,c1_0.colocacao,c1_0.id_piloto,c1_0.id_prova from chegada c1_0
-04:56:06,959 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
-04:56:06,959 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Gabriel]
-04:56:06,960 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
-04:56:06,961 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-04:56:06,961 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
-04:56:06,962 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-04:56:06,963 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
-04:56:06,963 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Geraldo]
-04:56:06,964 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
-04:56:06,965 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-04:56:06,965 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
-04:56:06,966 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
-04:56:06,967 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
-04:56:06,967 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Geraldo]
-04:56:06,968 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
-04:56:06,968 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
-04:56:06,969 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
-04:56:06,969 TRACE bind:24 - binding parameter (1:BIGINT) <- [2]
-04:56:06,971  INFO pooling:601 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/formula01]
+05:48:04,015  INFO Util:31 - Util.conectar - lendo arquivo util.properties: 
+05:48:04,019  INFO Util:38 - sgbd => postgresql
+05:48:04,019  INFO Util:39 - banco => formula01
+05:48:04,019  INFO Util:40 - ip => localhost
+05:48:04,019  INFO Util:45 - configurando postgresql
+05:48:04,044 DEBUG logging:38 - Logging Provider: org.jboss.logging.Log4jLoggerProvider
+05:48:04,142  INFO LogHelper:31 - HHH000204: Processing PersistenceUnitInfo [name: hibernate-postgresql]
+05:48:04,193  INFO Version:44 - HHH000412: Hibernate ORM core version 6.3.1.Final
+05:48:04,230 DEBUG RegionFactoryInitiator:122 - Cannot default RegionFactory based on registered strategies as `[]` RegionFactory strategies were registered
+05:48:04,231  INFO RegionFactoryInitiator:50 - HHH000026: Second-level cache disabled
+05:48:04,412  WARN pooling:80 - HHH10001002: Using built-in connection pool (not intended for production use)
+05:48:04,415  INFO pooling:135 - HHH10001005: Loaded JDBC driver class: org.postgresql.Driver
+05:48:04,415  INFO pooling:157 - HHH10001012: Connecting with JDBC URL [jdbc:postgresql://localhost:5432/formula01]
+05:48:04,416  INFO pooling:166 - HHH10001001: Connection properties: {password=****, user=postgres}
+05:48:04,416  INFO pooling:170 - HHH10001003: Autocommit mode: false
+05:48:04,418  INFO pooling:366 - HHH10001115: Connection pool size: 20 (min=1)
+05:48:04,625  WARN deprecation:152 - HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+05:48:05,466  INFO JtaPlatformInitiator:58 - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+05:48:05,481  INFO access:52 - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@134f8ef6] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+05:48:05,874 DEBUG SQL:135 - select p1_0.id,p1_0.escuderia,p1_0.nome from piloto p1_0 where p1_0.nome=?
+05:48:05,875 TRACE bind:24 - binding parameter (1:VARCHAR) <- [Geraldo]
+05:48:05,901 DEBUG SQL:135 - select p1_0.id from prova p1_0 where p1_0.id=?
+05:48:05,901 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
+05:48:05,909 DEBUG SQL:135 - select c1_0.id_prova,c1_0.id,c1_0.colocacao,c1_0.id_piloto,p1_0.id,p1_0.escuderia,p1_0.nome from chegada c1_0 left join piloto p1_0 on p1_0.id=c1_0.id_piloto where c1_0.id_prova=?
+05:48:05,910 TRACE bind:24 - binding parameter (1:BIGINT) <- [1]
+05:48:05,923  INFO pooling:601 - HHH10001008: Cleaning up connection pool [jdbc:postgresql://localhost:5432/formula01]

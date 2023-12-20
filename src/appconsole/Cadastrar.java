@@ -8,7 +8,6 @@ public class Cadastrar {
 		try {
 			Fachada.inicializar();
 
-			
 			Fachada.criarProva();
 			Fachada.criarProva();
 			
