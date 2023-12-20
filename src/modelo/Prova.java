@@ -1,5 +1,9 @@
 package modelo;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,11 +11,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "chegada")
-public class Chegada {
+@Table(name = "prova")
+public class Prova {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,17 +29,20 @@ public class Chegada {
 	@Column(name = "colocacao")
 	private Integer colocacao;
 
-	@ManyToOne
-	@JoinColumn(name = "id_piloto", nullable = false)
-	private Piloto piloto;
+	@OneToMany(mappedBy = "prova", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Chegada> chegadas = new ArrayList<>();
 
-	public Chegada() {
+	public Prova() {
+		this.chegadas = new ArrayList<Chegada>();
 	}
 
-	public Chegada(Prova prova, int colocacao, Piloto piloto) {
-		this.prova = prova;
-		this.colocacao = colocacao;
-		this.piloto = piloto;
+	// Metodos
+	public void addChegada(Chegada chegada) {
+		this.chegadas.add(chegada);
+	}
+
+	public void rmvChegada(Chegada chegada) {
+		this.chegadas.remove(chegada);
 	}
 
 	// Getters and setters
@@ -62,16 +70,16 @@ public class Chegada {
 		this.colocacao = colocacao;
 	}
 
-	public Piloto getPiloto() {
-		return piloto;
+	public List<Chegada> getChegadas() {
+		return chegadas;
 	}
 
-	public void setPiloto(Piloto piloto) {
-		this.piloto = piloto;
+	public void setChegadas(List<Chegada> chegadas) {
+		this.chegadas = chegadas;
 	}
 
 	@Override
 	public String toString() {
-		return "Chegada [id=" + id + ", prova=" + prova + ", colocacao=" + colocacao + ", piloto=" + piloto + "]";
+		return "Prova [id=" + id + ", prova=" + prova + ", colocacao=" + colocacao + ", chegadas=" + chegadas + "]";
 	}
 }

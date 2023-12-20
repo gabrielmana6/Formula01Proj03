@@ -1,34 +1,19 @@
 package regras_negocio;
 
-/**********************************
- * IFPB - SI
- * POB - Persistencia de Objetos
- * Prof. Fausto Ayres
- **********************************/
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import daojpa.DAO;
-import daojpa.DAOAluno;
-import daojpa.DAOPessoa;
-import daojpa.DAOTelefone;
-//import daodb4o.DAO;
-//import daodb4o.DAOAluno;
-//import daodb4o.DAOPessoa;
-//import daodb4o.DAOTelefone;
-import modelo.Aluno;
-import modelo.Pessoa;
-import modelo.Telefone;
+import daojpa.DAOChegada;
+import daojpa.DAOPiloto;
+import daojpa.DAOProva;
+import modelo.Piloto;
 
 public class Fachada {
 	private Fachada() {}
 
-	private static DAOPessoa daopessoa = new DAOPessoa();
-	private static DAOAluno daoaluno = new DAOAluno();
-	private static DAOTelefone daotelefone = new DAOTelefone();
+	private static DAOPiloto daopiloto = new DAOPiloto();
+	private static DAOChegada daochegada = new DAOChegada();
+	private static DAOProva daoprova= new DAOProva();
 
 	public static void inicializar() {
 		DAO.open();
@@ -38,239 +23,74 @@ public class Fachada {
 		DAO.close();
 	}
 
-	public static Pessoa localizarPessoa(String nome) throws Exception {
-		Pessoa p = daopessoa.read(nome);
-		if (p == null) {
-			throw new Exception("nome inexistente:" + nome);
-		}
-		return p;
-	}
+	//----------------------------------------------------------------------------------------------------------------------------------------------
+		// fachada para piloto
 
-	public static Pessoa criarPessoa(String nome, String data) throws Exception {
-		DAO.begin();
-		try {
-			// validar a data
-			LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		} catch (DateTimeParseException e) {
-			DAO.rollback();
-			throw new Exception("formato data invalido:" + data);
-		}
-		Pessoa p = daopessoa.read(nome);
-		if (p != null) {
-			DAO.rollback();
-			throw new Exception("criar pessoa - nome ja existe:" + nome);
-		}
-		p = new Pessoa(nome);
-		p.setDtNascimento(data);
-		daopessoa.create(p);
-		DAO.commit();
-		return p;
-	}
+	    public static Piloto criarPiloto(String nome, String escuderia) throws Exception{
+			DAO.begin();
+			Piloto piloto = daopiloto.read(nome);
+			if (piloto!=null)
+				throw new Exception("Piloto " + nome + " jÃ¡ existe.");
+			piloto = new Piloto(nome, escuderia);
+			
+			daopiloto.create(piloto);
+			DAO.commit();
+			return piloto;
+	    }
 
-	public static Aluno criarAluno(String nome, String data, double nota) throws Exception {
-		DAO.begin();
-		try {
-			LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-		} catch (DateTimeParseException e) {
-			DAO.rollback();
-			throw new Exception("formato data invalido:" + data);
-		}
+	    public static Piloto listarPiloto(String nome) throws Exception{
+	    	DAO.begin();
+	    	Piloto piloto = daopiloto.read(nome);
+	    	if(piloto == null)
+	    		throw new Exception("Piloto inexistente.");
+	    	return piloto;
+	    }
 
-		Pessoa p = daopessoa.read(nome); // nome de qualquer pessoa
-		if (p != null) {
-			DAO.rollback();
-			throw new Exception("criar aluno - nome ja existe:" + nome);
-		}
+	    public static List<Piloto> listarPilotos() {
+	    	DAO.begin();
+	    	List<Piloto> pilotos = daopiloto.readAll();
+	    	DAO.commit();
+	    	return pilotos;
+	    }
 
-		Aluno a = new Aluno(nome, nota);
-		a.setDtNascimento(data);
-		daoaluno.create(a);
-		DAO.commit();
-		return a;
-	}
+	    public static void editarPiloto(String nome, String novoNome, String novaEscuderia) throws Exception {
+	    	DAO.begin();
+	    	
+	    	Piloto piloto = daopiloto.read(nome);    	
+	    	if (piloto == null) throw new Exception("Piloto inexistente.");
+	    	
+	    	Piloto novoPiloto = daopiloto.read(novoNome);
+	    	if (novoPiloto != null && !piloto.getNome().equalsIgnoreCase(novoNome))	throw new Exception("JÃ¡ existe um piloto com nome " + novoNome);
+	    	
+			piloto.setNome(novoNome);
+			piloto.setEscuderia(novaEscuderia);
+			daopiloto.update(piloto);
+	    	
+	    	DAO.commit();
+	    }
 
-	public static void alterarData(String nome, String data) throws Exception {
-		DAO.begin();
-		Pessoa p = daopessoa.read(nome);
-		if (p == null) {
-			DAO.rollback();
-			throw new Exception("alterar pessoa - pessoa inexistente:" + nome);
-		}
-
-		if (data != null) {
-			try {
-				LocalDate.parse(data, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-				p.setDtNascimento(data);
-			} catch (DateTimeParseException e) {
-				DAO.rollback();
-				throw new Exception("alterar pessoa - formato data invalido:" + data);
-			}
-		}
-
-		//daopessoa.update(p);	//atualização automática
-		DAO.commit();
-	}
-
-	public static void alterarNome(String nome, String novonome) throws Exception {
-		DAO.begin();
-		Pessoa p = daopessoa.read(nome); // usando chave primaria
-		if (p == null) {
-			DAO.rollback();
-			throw new Exception("alterar nome - nome inexistente:" + nome);
-		}
-		p.setNome(novonome);
-		//daopessoa.update(p);		//atualização automática
-		DAO.commit();
-	}
-
-	public static void excluirPessoa(String nome) throws Exception {
-		DAO.begin();
-		Pessoa p = daopessoa.read(nome);
-		if (p == null) {
-			DAO.rollback();
-			throw new Exception("excluir pessoa - nome inexistente:" + nome);
-		}
-
-		// desligar a pessoa de seus telefones (orfaos) e apaga-los do banco
-		for (Telefone t : p.getTelefones()) {
-			t.setPessoa(null);
-			//daotelefone.update(t);	//atualização automática
-		}
-
-		daopessoa.delete(p); // apagar a pessoa
-		DAO.commit();
-	}
-
-	public static void incluirTelefone(String nome, String numero) throws Exception {
-		DAO.begin();
-		Pessoa p = daopessoa.read(nome);
-		if (p == null) {
-			DAO.rollback();
-			throw new Exception("criar telefone - nome inexistente" + nome + numero);
-		}
-		Telefone t = daotelefone.read(numero);
-		if (t != null) {
-			DAO.rollback();
-			throw new Exception("criar telefone - numero ja cadastrado:" + numero);
-		}
-		if (numero.isEmpty()) {
-			DAO.rollback();
-			throw new Exception("criar telefone - numero vazio:" + numero);
-		}
-
-		t = new Telefone(numero);
-		p.adicionar(t);
-		//daopessoa.update(p); 	//atualização automática
-		DAO.commit();
-	}
-
-	public static void excluirTelefone(String numero) throws Exception {
-		DAO.begin();
-		Telefone t = daotelefone.read(numero);
-		if (t == null) {
-			DAO.rollback();
-			throw new Exception("excluir telefone - numero inexistente:" + numero);
-		}
-		Pessoa p = t.getPessoa();
-		p.remover(t);
-		t.setPessoa(null);
-		//daopessoa.update(p);	//atualização automática
-		//daotelefone.delete(t); // propriedade orphanremoval=true
-		DAO.commit();
-	}
-
-	public static void alterarNumero(String numero, String novonumero) throws Exception {
-		DAO.begin();
-		Telefone t1 = daotelefone.read(numero);
-		if (t1 == null) {
-			DAO.rollback();
-			throw new Exception("alterar numero - numero inexistente:" + numero);
-		}
-		Telefone t2 = daotelefone.read(novonumero);
-		if (t2 != null) {
-			DAO.rollback();
-			throw new Exception("alterar numero - novo numero ja existe:" + novonumero);
-		}
-		if (novonumero.isEmpty()) {
-			DAO.rollback();
-			throw new Exception("alterar numero - novo numero vazio:");
-		}
-
-		t1.setNumero(novonumero); // substituir
-		//daotelefone.update(t1); 	//atualização automática
-		DAO.commit();
-	}
-
-	public static List<Pessoa> listarPessoas() {
-		DAO.begin();
-		List<Pessoa> result = daopessoa.readAll();
-		DAO.commit();
-		return result;
-	}
-
-	public static List<Aluno> listarAlunos() {
-		DAO.begin();
-		List<Aluno> result = daoaluno.readAll();
-		DAO.commit();
-		return result;
-	}
-
-	public static List<Telefone> listarTelefones() {
-		DAO.begin();
-		List<Telefone> result = daotelefone.readAll();
-		DAO.commit();
-		return result;
-	}
-
-	/**********************************************************
-	 * 
-	 * CONSULTAS IMPLEMENTADAS NOS DAO
-	 * 
-	 **********************************************************/
-	public static List<Pessoa> consultarPessoas(String caracteres) {
-		List<Pessoa> result;
-		DAO.begin();
-		if (caracteres.isEmpty())
-			result = daopessoa.readAll();
-		else
-			result = daopessoa.readAll(caracteres);
-		DAO.commit();
-		return result;
-	}
-
-	public static List<Telefone> consultarTelefones(String digitos) {
-		List<Telefone> result;
-		DAO.begin();
-		if (digitos.isEmpty())
-			result = daotelefone.readAll();
-		else
-			result = daotelefone.readAll(digitos);
-		DAO.commit();
-		return result;
-	}
-
-	public static List<Pessoa> consultarMesNascimento(String mes) {
-		List<Pessoa> result;
-		DAO.begin();
-		result = daopessoa.readByMes(mes);
-		DAO.commit();
-		return result;
-	}
-
-	public static List<Pessoa> consultarPessoasNTelefones(int n) {
-		List<Pessoa> result;
-		DAO.begin();
-		result = daopessoa.readByNTelefones(n);
-		DAO.commit();
-		return result;
-	}
-
-	public static boolean temTelefoneFixo(String nome) {
-		return daopessoa.temTelefoneFixo(nome);
-	}
-
-	public static boolean temTelefoneCelular(String nome) {
-		return daopessoa.temTelefoneCelular(nome);
-	}
+	    /*
+	    public static void deletarPiloto(String nome) throws Exception{
+	    	DAO.begin();
+	    	Piloto piloto = daopiloto.read(nome);
+	    	if(piloto == null)
+	    		throw new Exception("Piloto inexistente.");
+	    	
+	    	List<Prova> provas = daoprova.ListarProvasDoPiloto(piloto);
+	    	for(Prova prova: provas) {
+				deletarChegada(prova.getId(), nome);
+	    	}
+	    	
+	    	daopiloto.delete(piloto);
+	    	DAO.commit();
+	    }
+	    
+	    public static void deletarTodosPilotos() {
+	    	DAO.begin();
+	    	deletarTodasChegadas();
+	    	daopiloto.deleteAll();
+	    	DAO.commit();
+	    }
+	    */
 
 }
